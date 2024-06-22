@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
                             image: AssetImage(product.image),
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         child: const AspectRatio(
@@ -48,7 +48,7 @@ class ProductCard extends StatelessWidget {
                       ),
                       Positioned(
                         top: 0,
-                        right: MediaQuery.of(context).size.height * 0.005,
+                        right: 0,
                         child: CircleAvatar(
                           backgroundColor:
                               const Color.fromRGBO(238, 238, 238, 1),
@@ -84,6 +84,7 @@ class ProductCard extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.38,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "EGP ${product.price}",
@@ -98,7 +99,6 @@ class ProductCard extends StatelessWidget {
                                   : 18,
                         ),
                       ),
-                      const Spacer(),
                       IconButton(
                         icon: BlocProvider.of<ProductCubit>(context)
                                 .inMyCart(product: product)
@@ -110,6 +110,11 @@ class ProductCard extends StatelessWidget {
                                 Icons.add_circle,
                                 color: primaryColor,
                               ),
+                        iconSize: Responsive.isMobile(context)
+                            ? 32
+                            : Responsive.isTablet(context)
+                                ? 36
+                                : 40,
                         onPressed: cartOnPressed,
                       ),
                     ],

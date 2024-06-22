@@ -14,17 +14,21 @@ class SectionType extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          Text(
-            type,
-            style: TextStyle(
-              color: primaryColor,
-              fontSize: Responsive.isMobile(context)
-                  ? 24
-                  : Responsive.isTablet(context)
-                      ? 32
-                      : 40,
-              fontFamily: primaryFont,
-              fontWeight: FontWeight.w600,
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: Text(
+              type,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: Responsive.isMobile(context)
+                    ? 24
+                    : Responsive.isTablet(context)
+                        ? 32
+                        : 40,
+                fontFamily: primaryFont,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           const Spacer(),
