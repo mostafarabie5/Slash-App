@@ -28,7 +28,7 @@ class ProductCard extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * .32,
+                      height: MediaQuery.of(context).size.height * 0.20,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(product.image),
@@ -39,7 +39,8 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: MediaQuery.of(context).size.width * .225,
+                      top: 0,
+                      right: MediaQuery.of(context).size.height * 0.005,
                       child: CircleAvatar(
                         backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
                         child: IconButton(
@@ -66,7 +67,6 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "EGP ${product.price}",
@@ -76,6 +76,7 @@ class ProductCard extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
+                    const Spacer(),
                     IconButton(
                       icon: BlocProvider.of<ProductCubit>(context)
                               .inMyCart(product: product)

@@ -28,7 +28,7 @@ class FavoriteMyCartProduct extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width * .2,
+                    height: MediaQuery.of(context).size.height * .13,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(products[index].image),

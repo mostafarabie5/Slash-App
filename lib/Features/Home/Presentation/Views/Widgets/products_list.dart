@@ -22,7 +22,7 @@ class ProductsList extends StatelessWidget {
               if (snapShot.hasData) {
                 Map<String, List<ProductModel>> products = snapShot.data!;
                 return SizedBox(
-                  height: MediaQuery.of(context).size.height * .23,
+                  height: MediaQuery.of(context).size.height * .29,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
