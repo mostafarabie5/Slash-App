@@ -5,6 +5,7 @@ import 'package:slash/Features/Home/Presentation/ViewModel/HomeCubit/home_state.
 import 'package:slash/Features/Home/Presentation/Views/Widgets/product_card.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_cubit.dart';
 import 'package:slash/core/utils/product_model.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class ProductsList extends StatelessWidget {
   const ProductsList({super.key, required this.section});
@@ -22,7 +23,13 @@ class ProductsList extends StatelessWidget {
               if (snapShot.hasData) {
                 Map<String, List<ProductModel>> products = snapShot.data!;
                 return SizedBox(
-                  height: MediaQuery.of(context).size.height * .29,
+                  height: Responsive.isMobile(context)
+                      ? MediaQuery.of(context).size.height * .28
+                      : Responsive.isTablet(context)
+                          ? MediaQuery.of(context).size.width < 750
+                              ? MediaQuery.of(context).size.width * .35
+                              : 750 * .35
+                          : MediaQuery.of(context).size.width * .24,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,

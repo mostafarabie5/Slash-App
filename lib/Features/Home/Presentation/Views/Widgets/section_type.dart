@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_cubit.dart';
 import 'package:slash/Features/SeeAll/presentation/views/see_all_view.dart';
 import 'package:slash/constants.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class SectionType extends StatelessWidget {
   const SectionType({super.key, required this.type});
@@ -10,14 +11,18 @@ class SectionType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
           Text(
             type,
-            style: const TextStyle(
+            style: TextStyle(
               color: primaryColor,
-              fontSize: 22,
+              fontSize: Responsive.isMobile(context)
+                  ? 24
+                  : Responsive.isTablet(context)
+                      ? 32
+                      : 40,
               fontFamily: primaryFont,
               fontWeight: FontWeight.w600,
             ),
@@ -33,11 +38,15 @@ class SectionType extends StatelessWidget {
             },
             child: Row(
               children: [
-                const Text(
+                Text(
                   "See all",
                   style: TextStyle(
                       fontFamily: primaryFont,
-                      fontSize: 16,
+                      fontSize: Responsive.isMobile(context)
+                          ? 18
+                          : Responsive.isTablet(context)
+                              ? 22
+                              : 28,
                       fontWeight: FontWeight.w500,
                       color: primaryColor),
                 ),

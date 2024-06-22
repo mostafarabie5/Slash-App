@@ -7,7 +7,7 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 22),
+      padding: const EdgeInsets.only(bottom: 25),
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -17,7 +17,7 @@ class SearchBox extends StatelessWidget {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                   hintText: "Search Here..",
                   hintStyle: TextStyle(
                     color: Color.fromRGBO(150, 150, 150, 1),

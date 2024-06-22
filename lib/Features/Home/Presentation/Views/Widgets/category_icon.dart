@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slash/constants.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class CategoryIcon extends StatelessWidget {
   const CategoryIcon({super.key, required this.image, required this.category});
@@ -10,16 +11,31 @@ class CategoryIcon extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
-          radius: 40,
+          radius: Responsive.isMobile(context)
+              ? 48
+              : Responsive.isTablet(context)
+                  ? 60
+                  : 70,
           backgroundColor: primaryColor,
-          child: Image(image: AssetImage(image)),
+          child: Image(
+            image: AssetImage(image),
+            width: Responsive.isMobile(context)
+                ? 50
+                : Responsive.isTablet(context)
+                    ? 60
+                    : 90,
+          ),
         ),
         const SizedBox(height: 6),
         Text(
           category,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
+          style: TextStyle(
+            fontSize: Responsive.isMobile(context)
+                ? 18
+                : Responsive.isTablet(context)
+                    ? 22
+                    : 26,
+            fontWeight: FontWeight.w500,
             fontFamily: primaryFont,
           ),
         ),

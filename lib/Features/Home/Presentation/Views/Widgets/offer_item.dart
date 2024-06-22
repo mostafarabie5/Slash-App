@@ -12,6 +12,7 @@ class OfferItem extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.fill,
           image: AssetImage(offerImage),
+          filterQuality: FilterQuality.high,
         ),
         borderRadius: BorderRadius.circular(16),
       ),

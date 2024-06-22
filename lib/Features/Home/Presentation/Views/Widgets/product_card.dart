@@ -4,6 +4,7 @@ import 'package:slash/constants.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_cubit.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_state.dart';
 import 'package:slash/core/utils/product_model.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard(
@@ -25,42 +26,53 @@ class ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.20,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(product.image),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: Responsive.isMobile(context)
+                            ? MediaQuery.of(context).size.width * 0.38
+                            : Responsive.isTablet(context)
+                                ? MediaQuery.of(context).size.width * .36
+                                : MediaQuery.of(context).size.width * .46,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(product.image),
+                              fit: BoxFit.fitHeight),
+                        ),
+                        child: const AspectRatio(
+                          aspectRatio: 1,
                         ),
                       ),
-                      child: const AspectRatio(
-                        aspectRatio: 1,
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      right: MediaQuery.of(context).size.height * 0.005,
-                      child: CircleAvatar(
-                        backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
-                        child: IconButton(
-                          icon: BlocProvider.of<ProductCubit>(context)
-                                  .isFavorite(product: product)
-                              ? const Icon(
-                                  Icons.favorite,
-                                  color: Color.fromARGB(255, 208, 19, 6),
-                                )
-                              : const Icon(Icons.favorite_border),
-                          onPressed: favoriteOnPressed,
+                      Positioned(
+                        top: 0,
+                        right: MediaQuery.of(context).size.height * 0.005,
+                        child: CircleAvatar(
+                          backgroundColor:
+                              const Color.fromRGBO(238, 238, 238, 1),
+                          child: IconButton(
+                            icon: BlocProvider.of<ProductCubit>(context)
+                                    .isFavorite(product: product)
+                                ? const Icon(
+                                    Icons.favorite,
+                                    color: Color.fromARGB(255, 208, 19, 6),
+                                  )
+                                : const Icon(Icons.favorite_border),
+                            onPressed: favoriteOnPressed,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Text(
                   product.name,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: Responsive.isMobile(context)
+                        ? 16
+                        : Responsive.isTablet(context)
+                            ? 20
+                            : 24,
                     fontFamily: primaryFont,
                     fontWeight: FontWeight.w600,
                     color: primaryColor,
@@ -70,10 +82,15 @@ class ProductCard extends StatelessWidget {
                   children: [
                     Text(
                       "EGP ${product.price}",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: primaryColor,
                         fontFamily: primaryFont,
                         fontWeight: FontWeight.w600,
+                        fontSize: Responsive.isMobile(context)
+                            ? 14
+                            : Responsive.isTablet(context)
+                                ? 16
+                                : 18,
                       ),
                     ),
                     const Spacer(),

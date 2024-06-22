@@ -7,6 +7,7 @@ import 'package:slash/Features/Home/Presentation/ViewModel/HomeCubit/home_state.
 import 'package:slash/Features/Home/Presentation/Views/Widgets/offer_item.dart';
 import 'package:slash/constants.dart';
 import 'package:slash/core/utils/assets_data.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class Offers extends StatelessWidget {
   const Offers({super.key});
@@ -22,7 +23,11 @@ class Offers extends StatelessWidget {
               return OfferItem(offerImage: AssetsData.offers[index]);
             },
             options: CarouselOptions(
-                aspectRatio: 12 / 5,
+                aspectRatio: Responsive.isMobile(context)
+                    ? 25 / 10
+                    : Responsive.isTablet(context)
+                        ? 3.5 / 1
+                        : 4.4 / 1,
                 autoPlay: false,
                 enlargeCenterPage: true,
                 enableInfiniteScroll: false,
