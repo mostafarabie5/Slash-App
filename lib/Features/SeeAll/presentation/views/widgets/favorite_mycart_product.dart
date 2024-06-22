@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slash/Features/Favorites/Presentation/Manager/FavoritesCubit/favorites_cubit.dart';
 import 'package:slash/Features/MyCart/Presentation/Manager/MyCartCubit/my_cart_cubit.dart';
+import 'package:slash/constants.dart';
+import 'package:slash/core/utils/product_model.dart';
 
 class FavoriteMyCartProduct extends StatelessWidget {
   const FavoriteMyCartProduct({
@@ -10,7 +12,7 @@ class FavoriteMyCartProduct extends StatelessWidget {
     required this.icon,
     required this.type,
   });
-  final List<dynamic> products;
+  final List<ProductModel> products;
   final Icon icon;
   final int type;
   @override
@@ -25,18 +27,38 @@ class FavoriteMyCartProduct extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image(
-                  image: AssetImage(
-                    products[index]["image"],
-                  ),
-                  width: 100,
-                  height: 120,
-                  fit: BoxFit.fitWidth,
-                ),
+                Container(
+                    width: MediaQuery.of(context).size.width * .2,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(products[index].image),
+                          fit: BoxFit.fitWidth),
+                    ),
+                    child: const AspectRatio(
+                      aspectRatio: 1,
+                    )),
                 Column(
                   children: [
-                    Text(products[index]["name"]),
-                    Text(products[index]["price"].toString())
+                    Text(
+                      products[index].name,
+                      style: const TextStyle(
+                        color: primaryColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: primaryFont,
+                      ),
+                      softWrap: false,
+                      overflow: TextOverflow.clip,
+                    ),
+                    Text(
+                      products[index].price.toString(),
+                      style: const TextStyle(
+                        color: primaryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: primaryFont,
+                      ),
+                    )
                   ],
                 ),
                 IconButton(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slash/Features/Home/Presentation/ViewModel/HomeCubit/home_cubit.dart';
-import 'package:slash/constants.dart';
+import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_cubit.dart';
+import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_state.dart';
+import 'package:slash/core/utils/product_model.dart';
 import 'package:slash/core/widgets/navigation_bar.dart';
 import 'package:slash/Features/SeeAll/presentation/views/widgets/see_all_categories.dart';
 import 'package:slash/Features/SeeAll/presentation/views/widgets/see_all_products.dart';
@@ -15,22 +16,30 @@ class SeeAllView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isCategories =
-        BlocProvider.of<HomeCubit>(context).title == "Categories";
+        BlocProvider.of<SeeAllCubit>(context).title == "Categories";
 
     return Scaffold(
       appBar: const SlashAppBar(),
       bottomNavigationBar: const CustomNavigationBar(index: 0),
-      body: isCategories
-          ? const SeeAllCategories()
-          : FutureBuilder(
-              future: json,
-              builder: (context, snapShot) {
-                if (snapShot.hasData) {
-                  return SeeAllProducts(snapShot: snapShot);
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              }),
+      body: BlocBuilder<SeeAllCubit, SeeAllState>(builder: (context, state) {
+        return isCategories
+            ? const SeeAllCategories()
+            : FutureBuilder<Map<String, List<ProductModel>>>(
+                future: BlocProvider.of<SeeAllCubit>(context).getProducts(),
+                builder: (context, snapShot) {
+                  if (state is SeeAllLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is SeeAllSuccess) {
+                    if (snapShot.hasData) {
+                      return SeeAllProducts(products: snapShot.data!);
+                    } else {
+                      return const Center(child: Text("No Products..."));
+                    }
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                });
+      }),
     );
   }
 }

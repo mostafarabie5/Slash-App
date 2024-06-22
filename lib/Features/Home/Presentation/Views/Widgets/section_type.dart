@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slash/Features/Home/Presentation/ViewModel/HomeCubit/home_cubit.dart';
+import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_cubit.dart';
 import 'package:slash/Features/SeeAll/presentation/views/see_all_view.dart';
 import 'package:slash/constants.dart';
 
@@ -25,12 +25,11 @@ class SectionType extends StatelessWidget {
           const Spacer(),
           TextButton(
             onPressed: () {
-              BlocProvider.of<HomeCubit>(context).title = type;
+              BlocProvider.of<SeeAllCubit>(context).title = type;
 
-              BlocProvider.of<HomeCubit>(context).section =
+              BlocProvider.of<SeeAllCubit>(context).section =
                   (type != "Categories") ? sectionJson[type]! : "";
-              Navigator.pushNamed(context, SeeAllView.id).then(
-                  (_) => BlocProvider.of<HomeCubit>(context).refreshPage());
+              Navigator.pushNamed(context, SeeAllView.id);
             },
             child: Row(
               children: [

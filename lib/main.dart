@@ -6,6 +6,7 @@ import 'package:slash/Features/MyCart/Presentation/Manager/MyCartCubit/my_cart_c
 import 'package:slash/Features/Favorites/Presentation/Views/favorites_screen.dart';
 import 'package:slash/Features/Home/Presentation/Views/home_view.dart';
 import 'package:slash/Features/MyCart/Presentation/Views/my_cart_screen.dart';
+import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_cubit.dart';
 import 'package:slash/Features/SeeAll/presentation/views/see_all_view.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_cubit.dart';
 
@@ -24,16 +25,17 @@ class SlashApp extends StatelessWidget {
           BlocProvider(create: (context) => HomeCubit()),
           BlocProvider(create: (context) => FavoritesCubit()),
           BlocProvider(create: (context) => MyCartCubit()),
-          BlocProvider(create: (context) => ProductCubit())
+          BlocProvider(create: (context) => ProductCubit()),
+          BlocProvider(create: (context) => SeeAllCubit()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: HomeView.id,
           routes: {
-            HomeView.id: (context) => HomeView(),
-            FavoritesScreen.id: (context) => FavoritesScreen(),
-            MyCartScreen.id: (context) => MyCartScreen(),
-            SeeAllView.id: (context) => SeeAllView(),
+            HomeView.id: (context) => const HomeView(),
+            FavoritesScreen.id: (context) => const FavoritesScreen(),
+            MyCartScreen.id: (context) => const MyCartScreen(),
+            SeeAllView.id: (context) => const SeeAllView(),
           },
         ));
   }

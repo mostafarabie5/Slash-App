@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slash/constants.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_cubit.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_state.dart';
+import 'package:slash/core/utils/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard(
@@ -10,7 +11,7 @@ class ProductCard extends StatelessWidget {
       required this.product,
       required this.favoriteOnPressed,
       required this.cartOnPressed});
-  final dynamic product;
+  final ProductModel product;
   final void Function()? favoriteOnPressed;
   final void Function()? cartOnPressed;
 
@@ -30,15 +31,15 @@ class ProductCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * .32,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(product["image"]),
+                          image: AssetImage(product.image),
                         ),
                       ),
                       child: const AspectRatio(
-                        aspectRatio: 1 / 1,
+                        aspectRatio: 1,
                       ),
                     ),
                     Positioned(
-                      left: MediaQuery.of(context).size.width * .22,
+                      left: MediaQuery.of(context).size.width * .225,
                       child: CircleAvatar(
                         backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
                         child: IconButton(
@@ -56,7 +57,7 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  product['name'],
+                  product.name,
                   style: const TextStyle(
                     fontSize: 16,
                     fontFamily: primaryFont,
@@ -68,7 +69,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "EGP ${product['price']}",
+                      "EGP ${product.price}",
                       style: const TextStyle(
                         color: primaryColor,
                         fontFamily: primaryFont,

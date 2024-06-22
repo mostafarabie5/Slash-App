@@ -5,7 +5,7 @@ import 'package:slash/core/widgets/navigation_bar.dart';
 import 'package:slash/core/widgets/slash_app_bar.dart';
 import 'package:slash/Features/MyCart/Presentation/Manager/MyCartCubit/my_cart_cubit.dart';
 import 'package:slash/Features/MyCart/Presentation/Manager/MyCartCubit/my_cart_state.dart';
-import 'package:slash/Models/favorite_mycart_product.dart';
+import 'package:slash/Features/SeeAll/presentation/views/widgets/favorite_mycart_product.dart';
 import 'package:slash/constants.dart';
 
 class MyCartScreen extends StatelessWidget {

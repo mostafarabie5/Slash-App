@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slash/Features/Home/Presentation/ViewModel/HomeCubit/home_cubit.dart';
 import 'package:slash/Features/Home/Presentation/Views/Widgets/product_card.dart';
+import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_cubit.dart';
 import 'package:slash/constants.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_cubit.dart';
+import 'package:slash/core/utils/product_model.dart';
 
 class SeeAllProducts extends StatelessWidget {
-  const SeeAllProducts({super.key, required this.snapShot});
-  final AsyncSnapshot<dynamic> snapShot;
+  const SeeAllProducts({super.key, required this.products});
+  final Map<String, List<ProductModel>> products;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,7 +17,7 @@ class SeeAllProducts extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Text(
-            BlocProvider.of<HomeCubit>(context).title ?? "",
+            BlocProvider.of<SeeAllCubit>(context).title ?? "",
             softWrap: true,
             style: const TextStyle(
                 color: primaryColor,
@@ -33,12 +34,13 @@ class SeeAllProducts extends StatelessWidget {
                 crossAxisSpacing: 10,
                 crossAxisCount: 2,
               ),
-              itemCount: snapShot
-                  .data![BlocProvider.of<HomeCubit>(context).section].length,
+              itemCount:
+                  products[BlocProvider.of<SeeAllCubit>(context).section]!
+                      .length,
               padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
               itemBuilder: (context, index) {
-                dynamic product = snapShot
-                    .data![BlocProvider.of<HomeCubit>(context).section][index];
+                ProductModel product = products[
+                    BlocProvider.of<SeeAllCubit>(context).section]![index];
 
                 return ProductCard(
                   product: product,
@@ -57,58 +59,3 @@ class SeeAllProducts extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// class SeeAllProducts extends StatelessWidget {
-//   const SeeAllProducts({super.key, required this.snapShot});
-//   final AsyncSnapshot<dynamic> snapShot;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.only(left: 10),
-//           child: Align(
-//             alignment: Alignment.centerLeft,
-//             child: Text(
-//               BlocProvider.of<SeeAllCubit>(context).title,
-//               softWrap: true,
-//               style: const TextStyle(
-//                   color: primaryColor,
-//                   fontSize: 30,
-//                   fontWeight: FontWeight.bold,
-//                   fontFamily: primaryFont),
-//             ),
-//           ),
-//         ),
-//         Expanded(
-//           child: GridView.builder(
-//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                   crossAxisCount: 2),
-//               itemCount: snapShot
-//                   .data![BlocProvider.of<SeeAllCubit>(context).section].length,
-//               padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
-//               itemBuilder: (context, index) {
-//                 dynamic product = snapShot
-//                         .data![BlocProvider.of<SeeAllCubit>(context).section]
-//                     [index];
-
-//                 return ProductCard(
-//                   product: product,
-//                   favoriteOnPressed: () {
-//                     BlocProvider.of<SeeAllCubit>(context)
-//                         .addRemoveFavorite(context: context, product: product);
-//                   },
-//                   cartOnPressed: () {
-//                     BlocProvider.of<SeeAllCubit>(context)
-//                         .addRemoveProduct(context: context, product: product);
-//                   },
-//                 );
-//               }),
-//         )
-//       ],
-//     );
-//   }
-// }

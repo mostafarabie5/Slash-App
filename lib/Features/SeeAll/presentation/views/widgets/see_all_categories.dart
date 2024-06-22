@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slash/Features/Home/Presentation/ViewModel/HomeCubit/home_cubit.dart';
 import 'package:slash/Features/Home/Presentation/Views/Widgets/category_icon.dart';
+import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_cubit.dart';
 import 'package:slash/constants.dart';
 import 'package:slash/core/utils/assets_data.dart';
 
@@ -16,7 +16,7 @@ class SeeAllCategories extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Text(
-            BlocProvider.of<HomeCubit>(context).title ?? "",
+            BlocProvider.of<SeeAllCubit>(context).title ?? "",
             softWrap: true,
             style: const TextStyle(
                 color: primaryColor,
