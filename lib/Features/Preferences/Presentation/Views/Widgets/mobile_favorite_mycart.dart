@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slash/Features/Favorites/Presentation/Manager/FavoritesCubit/favorites_cubit.dart';
-import 'package:slash/Features/MyCart/Presentation/Manager/MyCartCubit/my_cart_cubit.dart';
+import 'package:slash/Features/Preferences/Presentation/Manager/PreferencesCubit/preferences_cubit.dart';
 import 'package:slash/constants.dart';
 import 'package:slash/core/utils/product_model.dart';
-import 'package:slash/core/utils/responsive.dart';
 
-class FavoriteMyCartProduct extends StatelessWidget {
-  const FavoriteMyCartProduct({
+class MobileFavoriteMyCart extends StatelessWidget {
+  const MobileFavoriteMyCart({
     super.key,
     required this.products,
     required this.icon,
@@ -30,11 +28,7 @@ class FavoriteMyCartProduct extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    height: Responsive.isMobile(context)
-                        ? MediaQuery.of(context).size.height * .16
-                        : Responsive.isTablet(context)
-                            ? MediaQuery.of(context).size.width * .20
-                            : MediaQuery.of(context).size.width * .23,
+                    height: MediaQuery.of(context).size.height * .16,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(products[index].image),
@@ -48,13 +42,9 @@ class FavoriteMyCartProduct extends StatelessWidget {
                   children: [
                     Text(
                       products[index].name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: primaryColor,
-                        fontSize: Responsive.isMobile(context)
-                            ? 22
-                            : Responsive.isTablet(context)
-                                ? 32
-                                : 45,
+                        fontSize: 22,
                         fontWeight: FontWeight.w600,
                         fontFamily: primaryFont,
                       ),
@@ -76,12 +66,15 @@ class FavoriteMyCartProduct extends StatelessWidget {
                     onPressed: () {
                       switch (type) {
                         case 1:
-                          BlocProvider.of<FavoritesCubit>(context)
+                          BlocProvider.of<PreferencesCubit>(context)
                               .removeFavorite(
                                   context: context, product: products[index]);
+                          break;
                         case 2:
-                          BlocProvider.of<MyCartCubit>(context).removeFromCart(
-                              context: context, product: products[index]);
+                          BlocProvider.of<PreferencesCubit>(context)
+                              .removeFromCart(
+                                  context: context, product: products[index]);
+                          break;
                       }
                     },
                     icon: icon)
