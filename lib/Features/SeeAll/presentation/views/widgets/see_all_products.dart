@@ -12,62 +12,114 @@ class SeeAllProducts extends StatelessWidget {
   final Map<String, List<ProductModel>> products;
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Text(
+              BlocProvider.of<SeeAllCubit>(context).title ?? "",
+              softWrap: true,
+              style: TextStyle(
+                  color: primaryColor,
+                  fontSize: Responsive.isMobile(context)
+                      ? 30
+                      : Responsive.isTablet(context)
+                          ? 40
+                          : 50,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: primaryFont),
+            ),
+          ),
+          Expanded(
+            child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: Responsive.isMobile(context)
+                      ? 10 / 11
+                      : Responsive.isTablet(context)
+                          ? 12 / 11
+                          : 13 / 11,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: Responsive.isMobile(context)
+                      ? 2
+                      : Responsive.isTablet(context)
+                          ? 3
+                          : 4,
+                ),
+                itemCount:
+                    products[BlocProvider.of<SeeAllCubit>(context).section]!
+                        .length,
+                itemBuilder: (context, index) {
+                  ProductModel product = products[
+                      BlocProvider.of<SeeAllCubit>(context).section]![index];
+                  return ProductCard(
+                      product: product,
+                      favoriteOnPressed: () {
+                        BlocProvider.of<ProductCubit>(context)
+                            .addRemoveFavorite(product: product);
+                      },
+                      cartOnPressed: () {
+                        BlocProvider.of<ProductCubit>(context)
+                            .addRemoveProduct(product: product);
+                      });
+                  // return CustomProductCard(
+                  //   product: product,
+                  // onPressed1: () {
+                  //   BlocProvider.of<ProductCubit>(context)
+                  //       .addRemoveFavorite(product: product);
+                  // },
+                  // onPressed2: () {
+                  //   BlocProvider.of<ProductCubit>(context)
+                  //       .addRemoveProduct(product: product);
+                  // },
+                  // );
+                }),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CustomProductCard extends StatelessWidget {
+  const CustomProductCard(
+      {super.key,
+      required this.product,
+      required this.onPressed1,
+      required this.onPressed2});
+  final ProductModel product;
+  final Function() onPressed1;
+  final Function() onPressed2;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            BlocProvider.of<SeeAllCubit>(context).title ?? "",
-            softWrap: true,
-            style: TextStyle(
-                color: primaryColor,
-                fontSize: Responsive.isMobile(context)
-                    ? 30
-                    : Responsive.isTablet(context)
-                        ? 40
-                        : 50,
-                fontWeight: FontWeight.bold,
-                fontFamily: primaryFont),
+        Expanded(
+          child: Expanded(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: ProductCard(
+                    product: product,
+                    favoriteOnPressed: onPressed1,
+                    cartOnPressed: onPressed2,
+                  ),
+                ),
+                const VerticalDivider(
+                  width: 10,
+                ),
+              ],
+            ),
           ),
         ),
-        Expanded(
-          child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: Responsive.isMobile(context)
-                    ? 9 / 11
-                    : Responsive.isTablet(context)
-                        ? 9 / 11
-                        : 9 / 11,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                crossAxisCount: Responsive.isMobile(context)
-                    ? 2
-                    : Responsive.isTablet(context)
-                        ? 3
-                        : 4,
-              ),
-              itemCount:
-                  products[BlocProvider.of<SeeAllCubit>(context).section]!
-                      .length,
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
-              itemBuilder: (context, index) {
-                ProductModel product = products[
-                    BlocProvider.of<SeeAllCubit>(context).section]![index];
-
-                return ProductCard(
-                  product: product,
-                  favoriteOnPressed: () {
-                    BlocProvider.of<ProductCubit>(context)
-                        .addRemoveFavorite(product: product);
-                  },
-                  cartOnPressed: () {
-                    BlocProvider.of<ProductCubit>(context)
-                        .addRemoveProduct(product: product);
-                  },
-                );
-              }),
-        )
+        const Divider(height: 10),
       ],
     );
   }

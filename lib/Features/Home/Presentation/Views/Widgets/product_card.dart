@@ -21,7 +21,7 @@ class ProductCard extends StatelessWidget {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(right: 20),
+          padding: const EdgeInsets.only(right: 12, left: 12),
           child: IntrinsicWidth(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,12 +33,14 @@ class ProductCard extends StatelessWidget {
                         height: Responsive.isMobile(context)
                             ? MediaQuery.of(context).size.width * 0.38
                             : Responsive.isTablet(context)
-                                ? MediaQuery.of(context).size.width * .36
+                                ? MediaQuery.of(context).size.width * .4
                                 : MediaQuery.of(context).size.width * .46,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
-                              image: AssetImage(product.image),
-                              fit: BoxFit.fitHeight),
+                            image: AssetImage(product.image),
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
                         child: const AspectRatio(
                           aspectRatio: 1,
@@ -78,36 +80,40 @@ class ProductCard extends StatelessWidget {
                     color: primaryColor,
                   ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "EGP ${product.price}",
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontFamily: primaryFont,
-                        fontWeight: FontWeight.w600,
-                        fontSize: Responsive.isMobile(context)
-                            ? 14
-                            : Responsive.isTablet(context)
-                                ? 16
-                                : 18,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.38,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "EGP ${product.price}",
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontFamily: primaryFont,
+                          fontWeight: FontWeight.w600,
+                          fontSize: Responsive.isMobile(context)
+                              ? 14
+                              : Responsive.isTablet(context)
+                                  ? 16
+                                  : 18,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      icon: BlocProvider.of<ProductCubit>(context)
-                              .inMyCart(product: product)
-                          ? const Icon(
-                              Icons.check_circle,
-                              color: primaryColor,
-                            )
-                          : const Icon(
-                              Icons.add_circle,
-                              color: primaryColor,
-                            ),
-                      onPressed: cartOnPressed,
-                    ),
-                  ],
+                      const Spacer(),
+                      IconButton(
+                        icon: BlocProvider.of<ProductCubit>(context)
+                                .inMyCart(product: product)
+                            ? const Icon(
+                                Icons.check_circle,
+                                color: primaryColor,
+                              )
+                            : const Icon(
+                                Icons.add_circle,
+                                color: primaryColor,
+                              ),
+                        onPressed: cartOnPressed,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
