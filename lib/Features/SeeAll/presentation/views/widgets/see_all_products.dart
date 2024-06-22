@@ -5,6 +5,7 @@ import 'package:slash/Features/SeeAll/presentation/manager/SeeAllCubit/see_all_c
 import 'package:slash/constants.dart';
 import 'package:slash/core/Cubits/ProductCubit/product_cubit.dart';
 import 'package:slash/core/utils/product_model.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class SeeAllProducts extends StatelessWidget {
   const SeeAllProducts({super.key, required this.products});
@@ -19,20 +20,28 @@ class SeeAllProducts extends StatelessWidget {
           child: Text(
             BlocProvider.of<SeeAllCubit>(context).title ?? "",
             softWrap: true,
-            style: const TextStyle(
+            style: TextStyle(
                 color: primaryColor,
-                fontSize: 30,
+                fontSize: Responsive.isMobile(context)
+                    ? 30
+                    : Responsive.isTablet(context)
+                        ? 40
+                        : 50,
                 fontWeight: FontWeight.bold,
                 fontFamily: primaryFont),
           ),
         ),
         Expanded(
           child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 10 / 11,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 12 / 11,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                crossAxisCount: 2,
+                crossAxisCount: Responsive.isMobile(context)
+                    ? 2
+                    : Responsive.isTablet(context)
+                        ? 3
+                        : 4,
               ),
               itemCount:
                   products[BlocProvider.of<SeeAllCubit>(context).section]!

@@ -20,7 +20,6 @@ class SeeAllView extends StatelessWidget {
 
     return Scaffold(
       appBar: const SlashAppBar(),
-      bottomNavigationBar: const CustomNavigationBar(index: 0),
       body: BlocBuilder<SeeAllCubit, SeeAllState>(builder: (context, state) {
         return isCategories
             ? const SeeAllCategories()
@@ -40,6 +39,7 @@ class SeeAllView extends StatelessWidget {
                   }
                 });
       }),
+      bottomNavigationBar: const CustomNavigationBar(index: 0),
     );
   }
 }
