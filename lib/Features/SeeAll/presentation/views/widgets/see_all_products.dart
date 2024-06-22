@@ -58,63 +58,10 @@ class SeeAllProducts extends StatelessWidget {
                         BlocProvider.of<ProductCubit>(context)
                             .addRemoveProduct(product: product);
                       });
-                  // return CustomProductCard(
-                  //   product: product,
-                  // onPressed1: () {
-                  //   BlocProvider.of<ProductCubit>(context)
-                  //       .addRemoveFavorite(product: product);
-                  // },
-                  // onPressed2: () {
-                  //   BlocProvider.of<ProductCubit>(context)
-                  //       .addRemoveProduct(product: product);
-                  // },
-                  // );
                 }),
           )
         ],
       ),
-    );
-  }
-}
-
-class CustomProductCard extends StatelessWidget {
-  const CustomProductCard(
-      {super.key,
-      required this.product,
-      required this.onPressed1,
-      required this.onPressed2});
-  final ProductModel product;
-  final Function() onPressed1;
-  final Function() onPressed2;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: ProductCard(
-                    product: product,
-                    favoriteOnPressed: onPressed1,
-                    cartOnPressed: onPressed2,
-                  ),
-                ),
-                const VerticalDivider(
-                  width: 10,
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Divider(height: 10),
-      ],
     );
   }
 }
