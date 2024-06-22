@@ -14,3 +14,12 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Instructions to run the project
+- Ensure you have flutter sdk and dart sdk
+- run dart pub get command
+- if you use vsCode press click right on the main file and then choose start without debugging
+
+
+
+
