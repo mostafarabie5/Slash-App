@@ -34,7 +34,11 @@ class SeeAllProducts extends StatelessWidget {
         Expanded(
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 12 / 11,
+                childAspectRatio: Responsive.isMobile(context)
+                    ? 9 / 11
+                    : Responsive.isTablet(context)
+                        ? 9 / 11
+                        : 9 / 11,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 crossAxisCount: Responsive.isMobile(context)

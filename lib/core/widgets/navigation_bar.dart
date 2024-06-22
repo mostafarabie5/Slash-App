@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:slash/Features/Favorites/Presentation/Views/favorites_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slash/Features/Home/Presentation/Views/home_view.dart';
-import 'package:slash/Features/MyCart/Presentation/Views/my_cart_screen.dart';
+import 'package:slash/Features/Preferences/Presentation/Manager/PreferencesCubit/preferences_cubit.dart';
+import 'package:slash/Features/Preferences/Presentation/Views/preferences_view.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   const CustomNavigationBar({super.key, required this.index});
@@ -40,10 +41,15 @@ class CustomNavigationBar extends StatelessWidget {
           switch (actionIndex) {
             case 0:
               Navigator.pushReplacementNamed(context, HomeView.id);
+              break;
             case 1:
-              Navigator.pushReplacementNamed(context, FavoritesScreen.id);
+              BlocProvider.of<PreferencesCubit>(context).type = 1;
+              Navigator.pushReplacementNamed(context, PreferencesScreen.id);
+              break;
             case 2:
-              Navigator.pushReplacementNamed(context, MyCartScreen.id);
+              BlocProvider.of<PreferencesCubit>(context).type = 2;
+              Navigator.pushReplacementNamed(context, PreferencesScreen.id);
+              break;
           }
         });
   }
