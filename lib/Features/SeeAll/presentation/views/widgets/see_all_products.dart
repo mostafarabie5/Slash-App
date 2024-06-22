@@ -21,7 +21,7 @@ class SeeAllProducts extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15),
             child: Text(
               BlocProvider.of<SeeAllCubit>(context).title ?? "",
-              softWrap: true,
+              overflow: TextOverflow.clip,
               style: TextStyle(
                   color: primaryColor,
                   fontSize: Responsive.isMobile(context)
@@ -36,18 +36,12 @@ class SeeAllProducts extends StatelessWidget {
           Expanded(
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: Responsive.isMobile(context)
-                      ? 10 / 11
-                      : Responsive.isTablet(context)
-                          ? 12 / 11
-                          : 13 / 11,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: Responsive.isMobile(context)
-                      ? 2
-                      : Responsive.isTablet(context)
-                          ? 3
-                          : 4,
-                ),
+                    childAspectRatio: Responsive.isMobile(context)
+                        ? 1 / 1.2
+                        : Responsive.isTablet(context)
+                            ? 1 / 1
+                            : 1 / 0.9,
+                    crossAxisCount: 2),
                 itemCount:
                     products[BlocProvider.of<SeeAllCubit>(context).section]!
                         .length,
