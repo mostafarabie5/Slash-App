@@ -22,21 +22,32 @@ class SlashAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               Icon(
                 Icons.location_on_rounded,
-                size: 30,
+                size: 26,
               ),
-              Column(
-                children: [
-                  Text("Nast City",
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    Text("Nast City",
+                        style: TextStyle(
+                          fontSize: 15,
+                        )),
+                    Text(
+                      "Cairo",
                       style: TextStyle(
-                        fontSize: 15,
-                      )),
-                  Text("Cairo",
-                      style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 26,
                         fontWeight: FontWeight.w600,
-                      )),
-                ],
-              )
+                        fontFamily: primaryFont,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.keyboard_arrow_down,
+                color: primaryColor,
+                size: 36,
+              ),
             ],
           ),
           Icon(
