@@ -49,7 +49,6 @@ class DesktopFavoriteMyCart extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             fontFamily: primaryFont,
                           ),
-                          softWrap: false,
                           overflow: TextOverflow.clip,
                         ),
                         Text(
