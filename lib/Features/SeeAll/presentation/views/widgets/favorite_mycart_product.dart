@@ -4,6 +4,7 @@ import 'package:slash/Features/Favorites/Presentation/Manager/FavoritesCubit/fav
 import 'package:slash/Features/MyCart/Presentation/Manager/MyCartCubit/my_cart_cubit.dart';
 import 'package:slash/constants.dart';
 import 'package:slash/core/utils/product_model.dart';
+import 'package:slash/core/utils/responsive.dart';
 
 class FavoriteMyCartProduct extends StatelessWidget {
   const FavoriteMyCartProduct({
@@ -21,6 +22,7 @@ class FavoriteMyCartProduct extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, top: 25, right: 20),
       child: ListView.builder(
         itemCount: products.length,
+        shrinkWrap: true,
         itemBuilder: (context, index) {
           return Container(
             margin: const EdgeInsets.only(bottom: 20),
@@ -28,22 +30,31 @@ class FavoriteMyCartProduct extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    height: MediaQuery.of(context).size.height * .13,
+                    height: Responsive.isMobile(context)
+                        ? MediaQuery.of(context).size.height * .16
+                        : Responsive.isTablet(context)
+                            ? MediaQuery.of(context).size.width * .20
+                            : MediaQuery.of(context).size.width * .23,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(products[index].image),
-                          fit: BoxFit.fitWidth),
+                          fit: BoxFit.fitHeight),
                     ),
                     child: const AspectRatio(
                       aspectRatio: 1,
                     )),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       products[index].name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: primaryColor,
-                        fontSize: 24,
+                        fontSize: Responsive.isMobile(context)
+                            ? 22
+                            : Responsive.isTablet(context)
+                                ? 32
+                                : 45,
                         fontWeight: FontWeight.w600,
                         fontFamily: primaryFont,
                       ),
