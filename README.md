@@ -17,8 +17,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Instructions to run the project
 - Ensure you have flutter sdk and dart sdk
-- run dart pub get command
-- if you use vsCode press click right on the main file and then choose start without debugging
+- Run dart pub get command
+- If you use vsCode press click right on the main file and then choose start without debugging
 
 
 
