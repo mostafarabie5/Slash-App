@@ -12,7 +12,7 @@ class CategoryIcon extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: Responsive.isMobile(context)
-              ? MediaQuery.of(context).size.width * .11
+              ? MediaQuery.of(context).size.width * .1
               : Responsive.isTablet(context)
                   ? 60
                   : 70,

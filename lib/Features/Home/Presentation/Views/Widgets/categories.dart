@@ -11,7 +11,7 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: Responsive.isMobile(context)
-          ? 155
+          ? MediaQuery.of(context).size.width * .3
           : Responsive.isTablet(context)
               ? 180
               : 190,
